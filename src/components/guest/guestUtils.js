@@ -26,16 +26,16 @@ export const getNewObjectAmount = (stateObj, type, amount) => {
 
   return res;
 
-  //   return amount < 0
-  //     ? {
-  //         ...stateObj,
-  //       }
-  //     : {
-  //         ...stateObj,
-  //         [type]: amount,
-  //         ...(type == 'adults' && { [type]: amount, children, infants }),
-  //         ...(type !== 'adults' && adults < 0 && { [type]: amount }),
-  //       };
+  // return amount < 0
+  //   ? {
+  //       ...stateObj,
+  //     }
+  //   : {
+  //       ...stateObj,
+  //       [type]: amount,
+  //       ...(type == 'adults' && { [type]: amount, children, infants }),
+  //       ...(type !== 'adults' && adults < 0 && { [type]: amount }),
+  //     };
 };
 
 export const getTextToShown = ({ adults, children, infants }) => {
@@ -54,8 +54,8 @@ export const getTextToShown = ({ adults, children, infants }) => {
   ans = `${
     guests_count == 0
       ? 'Guests'
-      : `${guests_count} guests ${
-          infants_count > 0 ? `, ${infants_count} infant ` : ''
+      : `${guests_count} guests${
+          infants_count > 0 ? `, ${infants_count} infant` : ''
         }`
   }`;
   return ans;
