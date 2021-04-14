@@ -1,4 +1,4 @@
-import { getNewObjectAmount, getTextToShown } from './guestUtils';
+import { getNewObjectAmount, getTextToShown } from './guest/guestUtils';
 
 describe('add one adult', () => {
   const expected = {

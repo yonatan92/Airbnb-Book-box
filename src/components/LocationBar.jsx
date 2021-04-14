@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaHippo, FiX } from 'react-icons/fi';
+import useLocationGoogle from '../hooks/useLocationGoogle';
 
 const LocationBar = () => {
+  const [suggest, loaded, error] = useLocationGoogle();
   let [stateLocationBar, setStateLocationBar] = useState(false);
+  const [predictions, setPredictions] = useState([]);
+
+  const handleChange = async (event) => {
+    const location = event.target.value;
+    if (location) {
+      const predictionsResult = await suggest(location);
+
+      setPredictions(predictionsResult);
+    } else {
+      setPredictions([]);
+    }
+  };
   return (
     <Box>
       <Label>where</Label>
@@ -13,9 +27,15 @@ const LocationBar = () => {
           placeholder="Anywhere"
           onFocus={() => setStateLocationBar(true)}
           onBlur={() => setStateLocationBar(false)}
+          onChange={(e) => handleChange(e)}
         />
         <XButton />
       </Test>
+
+      {predictions.length > 0 &&
+        predictions.map(({ description }) => (
+          <SinglePredictionBox>{description}</SinglePredictionBox>
+        ))}
     </Box>
   );
 };
@@ -67,4 +87,15 @@ const Label = styled.h4`
 
 const XButton = styled(FiX)`
   color: grey;
+`;
+
+const SinglePredictionBox = styled.div`
+  position: relative;
+  width: 100%;
+  min-height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 2rem;
+  margin: 1rem 0;
 `;
